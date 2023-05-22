@@ -84,6 +84,29 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
+const getAllBooksHandler = (request, h) => ({
+  status: 'success',
+  data: {
+    books,
+  },
+});
+
+const getBookByIdHandler = (request, h) => {
+
+};
+
+const editBookByIdHandler = (request, h) => {
+
+};
+
+const deleteBookByIdHandler = (request, h) => {
+
+};
+
 module.exports = {
   addBookHandler,
+  getAllBooksHandler,
+  getBookByIdHandler,
+  editBookByIdHandler,
+  deleteBookByIdHandler,
 };
