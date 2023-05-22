@@ -1,5 +1,5 @@
-/* eslint-disable consistent-return */
 /* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const { nanoid } = require('nanoid');
 const books = require('./books');
@@ -86,23 +86,21 @@ const addBookHandler = (request, h) => {
 };
 
 const getAllBooksHandler = (request, h) => {
-  const {name, reading, finished} = request.query;
+  const { name, reading, finished } = request.query;
 
   let filteredBooks = books;
 
   if (name) {
-    filteredBooks = filteredBooks.filter((book) =>
-      book.name.toLowerCase().includes(name.toLowerCase()) !== false);
+    filteredBooks = filteredBooks.filter((book) => book.name
+      .toLowerCase().includes(name.toLowerCase()) !== false);
   }
 
   if (reading) {
-    filteredBooks = filteredBooks.filter((book) =>
-      Number(book.reading) === Number(reading));
+    filteredBooks = filteredBooks.filter((book) => Number(book.reading) === Number(reading));
   }
 
   if (finished) {
-    filteredBooks = filteredBooks.filter((book) =>
-      Number(book.finished) === Number(finished));
+    filteredBooks = filteredBooks.filter((book) => Number(book.finished) === Number(finished));
   }
 
   return h.response({
@@ -231,41 +229,10 @@ const deleteBookByIdHandler = (request, h) => {
   return response;
 };
 
-const getAllReadingBooksHandler = (request, h) => {
-  const { reading } = request.query;
-  let read;
-  console.log(reading);
-  if (reading === 1) {
-    read = true;
-  } else {
-    read = false;
-  }
-  const book = books.filter((n) => n.reading === read)[0];
-  const bookCheck = book !== undefined;
-
-  if (bookCheck) {
-    return {
-      status: 'success',
-      data: {
-        book,
-      },
-    };
-  }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Buku tidak ditemukan',
-  });
-
-  response.code(404);
-  return response;
-};
-
 module.exports = {
   addBookHandler,
   getAllBooksHandler,
   getBookByIdHandler,
   editBookByIdHandler,
   deleteBookByIdHandler,
-  getAllReadingBooksHandler,
 };
